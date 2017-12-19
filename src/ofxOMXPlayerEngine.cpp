@@ -265,6 +265,19 @@ bool ofxOMXPlayerEngine::openPlayer(int startTimeInSeconds)
     }
 }
 
+bool ofxOMXPlayerEngine::seek (float timeInSeconds)
+{
+    bool didSeek = false;
+    if (omxReader.canSeek())
+    {
+        didSeek = omxReader.SeekTime(timeInSeconds * 1000.0f, 0, &startpts);
+    }
+
+   // if (didSeek) clock->start(startpts);
+
+    return didSeek;
+}
+
 #pragma mark threading
 void ofxOMXPlayerEngine::process()
 {
@@ -457,6 +470,23 @@ int ofxOMXPlayerEngine::increaseSpeed()
     }
     unlock();
     return speedMultiplier;
+}
+
+int ofxOMXPlayerEngine::decreaseSpeed()
+{
+	lock();
+	doSeek = true;
+
+	if (speedMultiplier-0.5 > 0)
+	{
+		speedMultiplier -= 0.5;
+		int newSpeed = normalPlaySpeed*speedMultiplier;
+
+		clock->setSpeed(newSpeed);
+		omxReader.setSpeed(newSpeed);
+	}
+	unlock();
+	return speedMultiplier;
 }
 
 void ofxOMXPlayerEngine::rewind()

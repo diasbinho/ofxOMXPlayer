@@ -47,11 +47,13 @@ public:
     void        stepFrame(int);
     void        scrubForward(int step=1);
     void        increaseSpeed();
+	void		decreaseSpeed();
     int         getSpeedMultiplier();
     void        setNormalSpeed();
     void        rewind();
     void        restartMovie();
     void        seekToTimeInSeconds(int timeInSeconds);
+    void        seekToTimeInSeconds(float timeInSeconds);
     
 
     void        saveImage(string imagePath="");

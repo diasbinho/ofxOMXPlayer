@@ -485,6 +485,14 @@ void ofxOMXPlayer::increaseSpeed()
     }
 }
 
+void ofxOMXPlayer::decreaseSpeed()
+{
+	if (engine)
+	{
+		speedMultiplier = engine->decreaseSpeed();
+	}
+}
+
 void ofxOMXPlayer::setNormalSpeed()
 {
     if(engine)
@@ -517,6 +525,10 @@ void ofxOMXPlayer::seekToTimeInSeconds(int timeInSeconds)
     openEngine(timeInSeconds);
 }
 
+void ofxOMXPlayer::seekToTimeInSeconds(float timeInSeconds)
+{
+    engine->seek(timeInSeconds);
+}
 
 #pragma mark audio
 

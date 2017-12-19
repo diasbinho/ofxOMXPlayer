@@ -71,14 +71,17 @@ public:
     
     
     int increaseSpeed();
+	int decreaseSpeed();
     void rewind();
     void setNormalSpeed();
     int normalPlaySpeed;
-    int speedMultiplier;
+    float speedMultiplier;
     
     bool doSeek;
     
     bool openPlayer(int startTimeInSeconds=0);
+
+    bool seek(float timeInSeconds);
     
     EGLImageKHR eglImage;
     ofxOMXPlayerSettings omxPlayerSettings;
